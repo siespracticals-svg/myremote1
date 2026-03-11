@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Preparing HTML page'
+                bat 'dir'
+            }
+        }
+    }
+
+    post {
+        always {
+            publishHTML([
+                reportDir: '.',
+                reportFiles: 'index.html',
+                reportName: 'HTML Report'
+            ])
+        }
+    }
+}
